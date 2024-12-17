@@ -11,7 +11,7 @@ load("@rules_rust//rust:defs.bzl", "rust_library")
 package(default_visibility = ["//visibility:public"])
 
 rust_library(
-    name = "windows_sys",
+    name = "syn",
     srcs = glob(
         include = ["**/*.rs"],
         allow_empty = True,
@@ -29,14 +29,13 @@ rust_library(
         ],
     ),
     crate_features = [
-        "Win32",
-        "Win32_Foundation",
-        "Win32_Storage",
-        "Win32_Storage_FileSystem",
-        "Win32_System",
-        "Win32_System_Console",
-        "Win32_System_SystemInformation",
+        "clone-impls",
         "default",
+        "derive",
+        "full",
+        "parsing",
+        "printing",
+        "proc-macro",
     ],
     crate_root = "src/lib.rs",
     edition = "2021",
@@ -45,7 +44,7 @@ rust_library(
     ],
     tags = [
         "cargo-bazel",
-        "crate-name=windows-sys",
+        "crate-name=syn",
         "manual",
         "noclippy",
         "norustfmt",
@@ -87,8 +86,10 @@ rust_library(
         "@rules_rust//rust/platform:x86_64-unknown-none": [],
         "//conditions:default": ["@platforms//:incompatible"],
     }),
-    version = "0.59.0",
+    version = "2.0.90",
     deps = [
-        "@vendor__windows-targets-0.52.6//:windows_targets",
+        "@vendor__proc-macro2-1.0.92//:proc_macro2",
+        "@vendor__quote-1.0.37//:quote",
+        "@vendor__unicode-ident-1.0.14//:unicode_ident",
     ],
 )
